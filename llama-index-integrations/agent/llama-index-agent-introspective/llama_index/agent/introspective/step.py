@@ -125,6 +125,7 @@ class IntrospectiveAgentWorker(BaseAgentWorker):
     def run_step(self, step: TaskStep, task: Task, **kwargs: Any) -> TaskStepOutput:
         """Run step."""
         # run main agent
+        original_response = step.input
         if self._main_agent_worker is not None:
             main_agent_messages = task.extra_state["main"]["memory"].get()
             main_agent = self._main_agent_worker.as_agent(
